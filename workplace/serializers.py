@@ -15,7 +15,7 @@ class BookingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Booking
-        fields = ['id', 'workplace', 'datetime_from', 'datetime_to']
+        fields = ['id', 'datetime_from', 'datetime_to']
 
 
 class WorkplaceListSerializer(serializers.ModelSerializer):
