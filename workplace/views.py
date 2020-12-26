@@ -7,8 +7,8 @@ from workplace.models import Workplace, Booking
 from workplace.serializers import (
     WorkplaceListSerializer,
     WorkplaceDetailSerializer,
-    BookingSerializer,
-    BookingEditSerializer
+    BookingListSerializer,
+    BookingEditSerializer,
 )
 
 
