@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  django:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: back
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
+    expose:
+      - 8000
+    depends_on:
+      - db
+    env_file:
+      - ./.env.prod
+  db:
+    image: postgres
+    container_name: db
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    restart: always
+    env_file:
+      - ./.env.prod.db
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - django
+
+volumes:
+  pgdata:

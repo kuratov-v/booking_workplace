@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  django:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: back
+    command: ./manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - ./.env
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db
+    restart: always
+    ports:
+      - "5432:5432"
