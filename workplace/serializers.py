@@ -26,6 +26,16 @@ class WorkplaceListSerializer(serializers.ModelSerializer):
         fields = ['id', 'number', 'description', 'room']
 
 
+class BookingListSerializer(serializers.ModelSerializer):
+    datetime_from = serializers.DateTimeField(format='%Y-%m-%d %H:%M')
+    datetime_to = serializers.DateTimeField(format='%Y-%m-%d %H:%M')
+    workplace = WorkplaceListSerializer()
+
+    class Meta:
+        model = Booking
+        fields = ['id', 'workplace', 'datetime_from', 'datetime_to']
+
+
 class WorkplaceDetailSerializer(serializers.ModelSerializer):
     booking = BookingSerializer(source='bookings', many=True)
     room = RoomSerializer()
